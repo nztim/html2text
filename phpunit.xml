@@ -1,4 +1,7 @@
-<phpunit stopOnFailure="true" stopOnError="true" beStrictAboutTestsThatDoNotTestAnything="false">
+<phpunit stopOnFailure="true"
+		 stopOnError="false"
+		 beStrictAboutTestsThatDoNotTestAnything="false"
+		 cacheResult="false">
 	<testsuites>
 		<testsuite name="Tests">
 			<!-- loads all *Test.php -->

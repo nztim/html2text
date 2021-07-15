@@ -1,144 +1,169 @@
 <?php
 
+use NZTim\Html2Text\Html2Text;
+
 require(__DIR__ . "/../src/Html2Text.php");
 
-class Html2TextTest extends \PHPUnit\Framework\TestCase {
+class Html2TextTest extends \PHPUnit\Framework\TestCase
+{
+    private function doTest($test, $options = [])
+    {
+        return $this->doTestWithResults($test, $test, $options);
+    }
 
-	function doTest($test, $options = array()) {
-		return $this->doTestWithResults($test, $test, $options);
-	}
+    private function doTestWithResults($test, $result, $options = [])
+    {
+        $this->assertTrue(file_exists(__DIR__ . "/$test.html"), "File '$test.html' did not exist");
+        $this->assertTrue(file_exists(__DIR__ . "/$result.txt"), "File '$result.txt' did not exist");
+        $input = file_get_contents(__DIR__ . "/$test.html");
+        $expected = Html2Text::fixNewlines(file_get_contents(__DIR__ . "/$result.txt"));
+        $output = Html2Text::convert($input, $options);
+        if ($output != $expected) {
+            file_put_contents(__DIR__ . "/$result.output", $output);
+        }
+        $this->assertEquals($output, $expected);
+    }
 
-	function doTestWithResults($test, $result, $options = array()) {
-		$this->assertTrue(file_exists(__DIR__ . "/$test.html"), "File '$test.html' did not exist");
-		$this->assertTrue(file_exists(__DIR__ . "/$result.txt"), "File '$result.txt' did not exist");
-		$input = file_get_contents(__DIR__ . "/$test.html");
-		$expected = \Soundasleep\Html2Text::fixNewlines(file_get_contents(__DIR__ . "/$result.txt"));
+    public function testBasic()
+    {
+        $this->doTest("basic");
+    }
 
-		$output = \Soundasleep\Html2Text::convert($input, $options);
+    public function testAnchors()
+    {
+        $this->doTest("anchors");
+    }
 
-		if ($output != $expected) {
-			file_put_contents(__DIR__ . "/$result.output", $output);
-		}
-		$this->assertEquals($output, $expected);
-	}
+    public function testMoreAnchors()
+    {
+        $this->doTest("more-anchors");
+    }
 
-	function testBasic() {
-		$this->doTest("basic");
-	}
+    public function test3()
+    {
+        $this->doTest("test3");
+    }
 
-	function testAnchors() {
-		$this->doTest("anchors");
-	}
+    public function test4()
+    {
+        $this->doTest("test4");
+    }
 
-	function testMoreAnchors() {
-		$this->doTest("more-anchors");
-	}
+    public function testTable()
+    {
+        $this->doTest("table");
+    }
 
-	function test3() {
-		$this->doTest("test3");
-	}
+    public function testNbsp()
+    {
+        $this->doTest("nbsp");
+    }
 
-	function test4() {
-		$this->doTest("test4");
-	}
+    public function testLists()
+    {
+        $this->doTest("lists");
+    }
 
-	function testTable() {
-		$this->doTest("table");
-	}
+    public function testPre()
+    {
+        $this->doTest("pre");
+    }
 
-	function testNbsp() {
-		$this->doTest("nbsp");
-	}
+    public function testNewLines()
+    {
+        $this->doTest("newlines");
+    }
 
-	function testLists() {
-		$this->doTest("lists");
-	}
+    public function testNestedDivs()
+    {
+        $this->doTest("nested-divs");
+    }
 
-	function testPre() {
-		$this->doTest("pre");
-	}
+    public function testBlockQuotes()
+    {
+        $this->doTest("blockquotes");
+    }
 
-	function testNewLines() {
-		$this->doTest("newlines");
-	}
+    public function testFullEmail()
+    {
+        $this->doTest("full_email");
+    }
 
-	function testNestedDivs() {
-		$this->doTest("nested-divs");
-	}
+    public function testImages()
+    {
+        $this->doTest("images");
+    }
 
-	function testBlockQuotes() {
-		$this->doTest("blockquotes");
-	}
+    public function testNonBreakingSpaces()
+    {
+        $this->doTest("non-breaking-spaces");
+    }
 
-	function testFullEmail() {
-		$this->doTest("full_email");
-	}
+    public function testUtf8Example()
+    {
+        $this->doTest("utf8-example");
+    }
 
-	function testImages() {
-		$this->doTest("images");
-	}
+    public function testWindows1252Example()
+    {
+        $this->doTest("windows-1252-example");
+    }
 
-	function testNonBreakingSpaces() {
-		$this->doTest("non-breaking-spaces");
-	}
+    public function testMsoffice()
+    {
+        $this->doTest("msoffice");
+    }
 
-	function testUtf8Example() {
-		$this->doTest("utf8-example");
-	}
+    public function testDOMProcessing()
+    {
+        $this->doTest("dom-processing");
+    }
 
-	function testWindows1252Example() {
-		$this->doTest("windows-1252-example");
-	}
+    public function testEmpty()
+    {
+        $this->doTest("empty");
+    }
 
-	function testMsoffice() {
-		$this->doTest("msoffice");
-	}
+    public function testHugeMsoffice()
+    {
+        $this->doTest("huge-msoffice");
+    }
 
-	function testDOMProcessing() {
-		$this->doTest("dom-processing");
-	}
+    public function testZeroWidthNonJoiners()
+    {
+        $this->doTest("zero-width-non-joiners");
+    }
 
-	function testEmpty() {
-		$this->doTest("empty");
-	}
+    public function testInvalidXML()
+    {
+        $this->expectWarning();
+        $this->doTest("invalid", ['ignore_errors' => false]);
+    }
 
-	function testHugeMsoffice() {
-		$this->doTest("huge-msoffice");
-	}
+    public function testInvalidXMLIgnore()
+    {
+        $this->doTest("invalid", ['ignore_errors' => true]);
+    }
 
-	function testZeroWidthNonJoiners() {
-		$this->doTest("zero-width-non-joiners");
-	}
+    public function testInvalidXMLIgnoreOldSyntax()
+    {
+        // for BC, allow old #convert(text, bool) syntax
+        $this->doTest("invalid", true);
+    }
 
-	/**
-	 * @expectedException PHPUnit\Framework\Error\Warning
-	 */
-	function testInvalidXML() {
-		$this->doTest("invalid", array('ignore_errors' => false));
-	}
+    public function testInvalidOption()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->doTest("basic", ['invalid_option' => true]);
+    }
 
-	function testInvalidXMLIgnore() {
-		$this->doTest("invalid", array('ignore_errors' => true));
-	}
+    public function testBasicDropLinks()
+    {
+        $this->doTestWithResults("basic", "basic.no-links", ['drop_links' => true]);
+    }
 
-	function testInvalidXMLIgnoreOldSyntax() {
-		// for BC, allow old #convert(text, bool) syntax
-		$this->doTest("invalid", true);
-	}
-
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	function testInvalidOption() {
-		$this->doTest("basic", array('invalid_option' => true));
-	}
-
-	function testBasicDropLinks() {
-		$this->doTestWithResults("basic", "basic.no-links", array('drop_links' => true));
-	}
-
-	function testAnchorsDropLinks() {
-		$this->doTestWithResults("anchors", "anchors.no-links", array('drop_links' => true));
-	}
-
+    public function testAnchorsDropLinks()
+    {
+        $this->doTestWithResults("anchors", "anchors.no-links", ['drop_links' => true]);
+    }
 }

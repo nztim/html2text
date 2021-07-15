@@ -43,27 +43,11 @@ within a div
 [A link](http://foo.com)
 ```
 
-See the [original blog post](http://journals.jevon.org/users/jevon-phd/entry/19818) or the related [StackOverflow answer](http://stackoverflow.com/a/2564472/39531).
-
-## Installing
-
-You can use [Composer](http://getcomposer.org/) to add the [package](https://packagist.org/packages/soundasleep/html2text) to your project:
-
-```json
-{
-  "require": {
-    "soundasleep/html2text": "~1.1"
-  }
-}
-```
-
-And then use it quite simply:
+## Usage
 
 ```php
-$text = \Soundasleep\Html2Text::convert($html);
+$text = \NZTim\html2text\Html2Text::convert($html);
 ```
-
-You can also include the supplied `html2text.php` and use `$text = convert_html_to_text($html);` instead.
 
 ### Options
 
@@ -75,11 +59,11 @@ You can also include the supplied `html2text.php` and use `$text = convert_html_
 Pass along options as a second argument to `convert`, for example:
 
 ```php
-$options = array(
-  'ignore_errors' => true,
-  // other options go here
-);
-$text = \Soundasleep\Html2Text::convert($html, $options);
+$options = [
+    'ignore_errors' => true,
+    // other options go here
+];
+$text = \NZTim\html2text\Html2Text::convert($html, $options);
 ```
 
 ## Tests
@@ -96,6 +80,4 @@ You need to [install the PHP XML extension](https://github.com/soundasleep/html2
 
 `html2text` is [licensed under MIT](LICENSE.md), making it suitable for both Eclipse and GPL projects.
 
-## Other versions
-
-Also see [html2text_ruby](https://github.com/soundasleep/html2text_ruby), a Ruby implementation.
+This project is forked from [Jevon Wright's original](https://github.com/soundasleep/html2text) and updated for PHP8.

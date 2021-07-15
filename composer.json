@@ -8,13 +8,10 @@
 		"text",
 		"email"
 	],
-	"homepage": "https://github.com/soundasleep/html2text",
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Jevon Wright",
-			"homepage": "https://jevon.org",
-			"role": "Developer"
+			"name": "Jevon Wright"
 		},
 		{
 			"name": "Tim Wylie"

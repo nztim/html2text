@@ -2,6 +2,8 @@
 
 namespace Soundasleep;
 
+use RuntimeException;
+
 class Html2Text {
 
 	public static function defaultOptions() {
@@ -24,7 +26,7 @@ class Html2Text {
 	 * @param string $html the input HTML
 	 * @param boolean $ignore_error Ignore xml parsing errors
 	 * @return string the HTML converted, as best as possible, to text
-	 * @throws Html2TextException if the HTML could not be loaded as a {@link \DOMDocument}
+	 * @throws RuntimeException if the HTML could not be loaded as a {@link \DOMDocument}
 	 */
 	public static function convert($html, $options = array()) {
 
@@ -172,7 +174,7 @@ class Html2Text {
 		}
 
 		if (!$load_result) {
-			throw new Html2TextException("Could not load HTML - badly formed?", $html);
+			throw new RuntimeException("Could not load HTML - badly formed?", $html);
 		}
 
 		return $doc;

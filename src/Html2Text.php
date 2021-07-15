@@ -199,7 +199,7 @@ class Html2Text
 			$nextNode = $nextNode->nextSibling;
 		}
 		$nextName = null;
-		if (($nextNode instanceof DOMElement || $nextNode instanceof DOMText) && $nextNode != null) {
+		if ($nextNode instanceof DOMElement || $nextNode instanceof DOMText) {
 			$nextName = strtolower($nextNode->nodeName);
 		}
 		return $nextName;

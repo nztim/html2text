@@ -46,7 +46,7 @@ within a div
 ## Usage
 
 ```php
-$text = \NZTim\html2text\Html2Text::convert($html);
+$text = \NZTim\Html2text\Html2text::convert($html);
 ```
 
 ### Options
@@ -63,7 +63,7 @@ $options = [
     'ignore_errors' => true,
     // other options go here
 ];
-$text = \NZTim\html2text\Html2Text::convert($html, $options);
+$text = \NZTim\Html2text\Html2text::convert($html, $options);
 ```
 
 ## Tests

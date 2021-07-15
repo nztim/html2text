@@ -1,6 +1,6 @@
 <?php
 
-use NZTim\Html2Text\Html2Text;
+use NZTim\Html2text\Html2text;
 
 require(__DIR__ . "/../src/Html2Text.php");
 
@@ -8,7 +8,7 @@ class Html2TextTest extends \PHPUnit\Framework\TestCase
 {
     private function doTest($test, $options = [])
     {
-        return $this->doTestWithResults($test, $test, $options);
+        $this->doTestWithResults($test, $test, $options);
     }
 
     private function doTestWithResults($test, $result, $options = [])

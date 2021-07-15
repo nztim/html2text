@@ -1,6 +1,6 @@
 <?php
 
-namespace NZTim\Html2Text;
+namespace NZTim\Html2text;
 
 use DOMDocument;
 use DOMDocumentType;
@@ -9,7 +9,7 @@ use DOMProcessingInstruction;
 use DOMText;
 use RuntimeException;
 
-class Html2Text
+class Html2text
 {
 	public static function defaultOptions(): array
 	{

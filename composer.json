@@ -22,7 +22,7 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"NZTim\\Html2Text\\": "src"
+			"NZTim\\Html2text\\": "src"
 		}
 	},
 	"require": {

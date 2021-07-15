@@ -1,6 +1,6 @@
 <?php
 
-namespace Soundasleep;
+namespace NZTim\Html2Text;
 
 use RuntimeException;
 
